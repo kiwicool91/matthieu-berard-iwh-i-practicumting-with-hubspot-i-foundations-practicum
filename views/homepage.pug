@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Pokedex
+    meta(name="description" content="Pokedex for Integrating With HubSpot I Practicum")
+
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container.container--pokedex.is-flex.is-flex-direction-column
+        h1.is-size-1.has-text-weight-bold.has-text-centered Pokedex
+        .is-flex
+            table.table.is-striped.is-hoverable.is-fullwidth
+                thead
+                tr.row
+                    th Name
+                    th Type
+                    th Weak Type
+                tbody
+                each pokemon in pokemons
+                    tr.row
+                        td #{pokemon.name}
+                        td #{pokemon.primary_type}
+                        td #{pokemon.secondary_type}
+        a.button.is-primary.is-medium.has-text-weight-bold(href="/update-cobj") Add Pokemon

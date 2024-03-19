@@ -1,5 +1,6 @@
-const express = require('express');
+require('dotenv').config();
 const axios = require('axios');
+const express = require('express');
 const app = express();
 
 app.set('view engine', 'pug');
@@ -8,11 +9,34 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const POKEMON_APP_ID = process.env.POKEMON_APP_ID;
+const POKEMON_CO_ID = process.env.POKEMON_CO_ID;
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+const hubspotHeaders = {
+    headers: {
+        'Authorization': `Bearer ${POKEMON_APP_ID}`,
+        'Content-Type': 'application/json'
+    }
+}
 
-// * Code for Route 1 goes here
+app.get('/', async (req, res) => {
+    console.log('Get');
+
+    const url = `https://api.hubapi.com/crm/v3/objects/${POKEMON_CO_ID}?limit=100&archived=false&properties=name&properties=primary_type&properties=secondary_type`;
+
+    try {
+        const response = await axios.get(url, hubspotHeaders);
+        console.log('response', response.data.results);
+
+        const pokemons = response.data.results.map(result => result.properties);
+
+        res.render('homepage', { pokemons })
+    } catch (error) {
+        console.error('error in get', error)
+        return;
+    }
+}
+);
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 

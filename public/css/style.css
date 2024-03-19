@@ -2,9 +2,6 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 :root {
     --primary_font: 'Victor Mono', monospace;
-
-    --body_font_size: 1.6rem;
-
 }
 
 body, * {
@@ -13,4 +10,17 @@ body, * {
 
 .container--pokedex {
     gap: 1.6rem;
+}
+
+.field.is-grouped > .control:not(:last-child) {
+    margin-left: 0;
+    margin-right: 0.75rem;
+}
+
+.form .field.is-grouped > .control {
+    flex-grow: 1;
+}
+
+.form .field.is-grouped > .control .button {
+    width: 100%;
 }

@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title #{title}
+    meta(name="description" content="Update Pokedex for Integrating With HubSpot I Practicum")
+
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container.container--pokedex.is-flex.is-flex-direction-column
+      h1.is-size-1.has-text-weight-bold.has-text-centered Update Pokedex
+      form.form(action="/update-cobj", method="post")
+        fieldset.field
+          label.label Name*
+          .control
+            input.input(type="text", name="name", required)
+        fieldset.field
+          label.label Type*
+          .control
+            input.input(type="text", name="primary_type", required)
+        fieldset.field
+          label.label Weak Type*
+          .control
+            input.input(type="text", name="secondary_type", required)
+        .field.is-grouped
+          .control
+            button.button.is-link(type="submit") Submit
+          .control
+            a.button.is-link.is-light(href="/") Return to the homepage
